@@ -1,0 +1,74 @@
+body, input, textarea, select {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+body {
+    margin: 0px;
+    min-height: 100vh;
+}
+
+.input-location-form {
+    max-width: fit-content;
+    margin: 50px auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.input-location-container {
+    display: flex;
+    gap: 5px;
+}
+
+.input-location-by-city-name-block,
+.input-location-by-coordinates-block {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 350px;
+    height: 135px;
+    padding: 5px;
+}
+
+.location-type-button {
+    height: 50px;
+    width: 150px;
+    align-self: center;
+}
+
+.input-city-name,
+.input-coordinates {
+    margin: auto;
+}
+
+.input-latitude {
+    display: flex;
+}
+
+.input-latitude input {
+    margin-bottom: 5px;
+    margin-left: auto;
+}
+
+.input-date-block {
+    display: block;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 5px 0px;
+    min-height: 10vh;
+}
+
+.input-start-and-end-date-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-start-date-block,
+.input-end-date-block {
+    margin: auto;
+}

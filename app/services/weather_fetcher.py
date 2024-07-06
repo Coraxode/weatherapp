@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime, timedelta
 from fastapi import HTTPException
 from app.config import API_KEY, API_URL
 from app.schemes import Location, LocationType
@@ -23,6 +24,8 @@ def get_weather_data(
     # Add info about start_date and end_date (if needed).
     # Raise exception if only one of two is specified
     if start_date and end_date:
+        # Add 1 day to the end date to receive the correct data via the API
+        end_date = (datetime.strptime(end_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
         api_url += 'history/daily'
         params['start_date'] = start_date
         params['end_date'] = end_date
@@ -30,7 +33,7 @@ def get_weather_data(
         raise HTTPException(status_code=400, detail="You must set both start_date and end_date.")
     else:
         api_url += 'current'
-
+    print(api_url, params)
     try:
         response = requests.get(api_url, params=params).json()
     except requests.RequestException as e:
