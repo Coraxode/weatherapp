@@ -6,6 +6,8 @@ body, input, textarea, select {
 body {
     margin: 0px;
     min-height: 100vh;
+    background: rgb(42,209,206);
+    background: linear-gradient(0deg, rgba(42,209,206,0.5648460067620799) 0%, rgba(255,255,255,1) 100%); 
 }
 
 .input-location-form {

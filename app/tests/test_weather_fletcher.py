@@ -1,7 +1,5 @@
 import json
 from requests.models import Response
-from pytest import raises
-from fastapi import HTTPException
 from fastapi.testclient import TestClient
 from app.main import app
 from app.schemes import Location, LocationType
@@ -84,25 +82,16 @@ def get_request_data():
     return response
 
 
-def test_get_weather_data_only_one_date(mocker):
-    mocker.patch('requests.get', return_value=get_request_data)
-    location = get_location_data()
-
-    with raises(HTTPException, match="400: You must set both start_date and end_date."):
-        get_weather_data(location, '2024-07-01')
-
-
 def test_get_weather_data(mocker):
-    mocker.patch('requests.get', return_value=get_request_data())
+    request_data = get_request_data()
+    mocker.patch('requests.get', return_value=request_data)
     location = get_location_data()
 
     weather_data = get_weather_data(location, '2024-07-01', '2024-07-03')
 
     assert weather_data['city'] == location.city_name
-    assert weather_data['data'][0]['date'] == '2024-07-03'
-    assert weather_data['data'][0]['avg_temperature'] == 15.7
-    assert weather_data['data'][0]['max_temperature'] == 19
-    assert weather_data['data'][0]['min_temperature'] == 12.9
-    assert weather_data['data'][0]['avg_humidity'] == 83
-    assert weather_data['data'][0]['avg_wind_speed'] == 1.2
-    assert weather_data['data'][0]['max_uv_index'] == 3.2
+    assert weather_data['data'][0]['date'] == '03'
+    assert weather_data['data'][0]['avg_temperature'] == request_data.json()['data'][0]['temp']
+    assert weather_data['data'][0]['avg_humidity'] == request_data.json()['data'][0]['rh']
+    assert weather_data['data'][0]['avg_wind_speed'] == request_data.json()['data'][0]['wind_spd']
+    assert weather_data['data'][0]['max_uv_index'] == request_data.json()['data'][0]['max_uv']

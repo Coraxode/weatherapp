@@ -1,7 +1,9 @@
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Analyzer</title>
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/main.css') }}" rel="stylesheet">
 </head>
 <body>
 </body>
@@ -34,11 +36,11 @@
                 <div class="input-start-and-end-date-block">
                     <div class="input-start-date-block">
                         <label for='start_date'>From: </label>
-                        <input type="date" name="start_date">
+                        <input type="date" name="start_date" required>
                     </div>
                     <div class="input-end-date-block">
                         <label for='end_date'>To: </label>
-                        <input type="date" name="end_date">
+                        <input type="date" name="end_date" required>
                     </div>
                 </div>
             </div>

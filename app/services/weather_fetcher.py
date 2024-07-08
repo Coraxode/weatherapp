@@ -5,10 +5,21 @@ from app.config import API_KEY, API_URL
 from app.schemes import Location, LocationType
 
 
+def get_date(date: str, difference: int) -> datetime:
+    date = datetime.strptime(date, "%Y-%m-%d")
+
+    if difference < 28:
+        return date.strftime("%d")
+    elif difference < 365:
+        return date.strftime("%d-%m")
+    else:
+        return date.strftime("%d-%m-%Y")
+
+
 def get_weather_data(
     location: Location,
-    start_date: str = None,
-    end_date: str = None
+    start_date: str,
+    end_date: str,
 ) -> dict:
     api_url = API_URL
     api_key = API_KEY
@@ -29,11 +40,7 @@ def get_weather_data(
         api_url += 'history/daily'
         params['start_date'] = start_date
         params['end_date'] = end_date
-    elif start_date or end_date:
-        raise HTTPException(status_code=400, detail="You must set both start_date and end_date.")
-    else:
-        api_url += 'current'
-    print(api_url, params)
+
     try:
         response = requests.get(api_url, params=params).json()
     except requests.RequestException as e:
@@ -43,7 +50,7 @@ def get_weather_data(
     if 'error' in response:
         raise HTTPException(status_code=400, detail=response['error'])
     if 'city_name' not in response:
-        raise HTTPException(status_code=400, detail="Invalid location.")
+        raise HTTPException(status_code=400, detail="Invalid location or date.")
     if response['data'][0]['temp'] is None:
         raise HTTPException(status_code=400, detail="Invalid request.")
 
@@ -52,15 +59,14 @@ def get_weather_data(
 
 def proccess_weather_data(weather_data: dict) -> dict:
     try:
-        return_data = {"city": weather_data['city_name']}
+        num_of_records = len(weather_data['data'])
+        return_data = {"city": weather_data['city_name'], "num_of_records": num_of_records}
         return_data['data'] = []
 
         for weather in weather_data['data']:
             return_data['data'].append({
-                "date": weather['datetime'],
+                "date": get_date(weather['datetime'], int(num_of_records)),
                 "avg_temperature": weather['temp'],
-                "max_temperature": weather['max_temp'],
-                "min_temperature": weather['min_temp'],
                 "avg_humidity": weather['rh'],
                 "avg_wind_speed": weather['wind_spd'],
                 "max_uv_index": weather['max_uv'],
