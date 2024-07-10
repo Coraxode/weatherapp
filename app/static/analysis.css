@@ -1,22 +1,52 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+body, input, textarea, select {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
 }
+
+body {
+    margin: 0px;
+    min-height: 100vh;
+    background: rgb(42,209,206);
+    background: linear-gradient(0deg, rgba(42,209,206,0.5648460067620799) 0%, rgba(255,255,255,1) 100%); 
+}
+
+.main-content,
+.visualizations {
+    max-width: fit-content;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: brightness(90%);
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.main-content h1, h2 {
+    text-align: center;
+    margin: 5px;
+}
+
+.visualizations {
+    width: 84%;
+    display: block;
+    gap: 5px;
+}
+
+.visualizations img {
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
+
 .table th, .table td {
-    border: 1px solid #ddd;
+    border: 1px solid black;
     padding: 8px;
     text-align: center;
-}
-.table th {
-    background-color: #f2f2f2;
-}
-caption {
-    caption-side: top;
-    font-size: 1.5em;
-    margin-bottom: 10px;
 }

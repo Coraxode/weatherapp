@@ -7,17 +7,19 @@
     <link href="{{ url_for('static', path='/analysis.css') }}" rel="stylesheet">
 </head>
 <body>
-    <h1>Weather Data Analysis</h1>
-    <h1>City: {{ city }}</h1>
-    <div>
-        {{ descriptive_stats | safe }}
+    <div class="main-content">
+        <h1>Weather Data Analysis</h1>
+        <h1>City: {{ city }}</h1>
+        <h2>{{ start_date }} - {{ end_date }}</h2>
+        <div>
+            {{ descriptive_stats | safe }}
+        </div>
     </div>
-    <div>
+    <div class="visualizations">
         <img src="data:image/png;base64,{{ visualizations.img_avg_temperature }}" alt="Weather Visualization1">
         <img src="data:image/png;base64,{{ visualizations.img_avg_humidity }}" alt="Weather Visualization2">
         <img src="data:image/png;base64,{{ visualizations.img_avg_wind_speed }}" alt="Weather Visualization2">
         <img src="data:image/png;base64,{{ visualizations.img_max_uv_index }}" alt="Weather Visualization2">
     </div>
-
 </body>
 </html>

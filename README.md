@@ -19,3 +19,11 @@ A website for weather forecasts and historical data analysis, featuring interact
 - Data Manipulation: Pandas
 - HTTP Requests: Requests
 - Visualization: Matplotlib
+
+### Screenshots
+
+#### Main page:
+![image](https://github.com/Coraxode/weatherapp/assets/119138122/67b49862-dac5-4060-9fa0-1d54075ec1f3)
+
+#### Analysis page
+![image](https://github.com/Coraxode/weatherapp/assets/119138122/8ed9d275-4d95-4785-8602-7ee496a25381)

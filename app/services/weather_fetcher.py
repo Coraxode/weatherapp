@@ -41,6 +41,10 @@ def get_weather_data(
         params['start_date'] = start_date
         params['end_date'] = end_date
 
+        # Change the date format to better display the date on the site
+        start_date = datetime.strptime(start_date, "%Y-%m-%d").strftime("%d.%m.%Y")
+        end_date = (datetime.strptime(end_date, "%Y-%m-%d") - timedelta(days=1)).strftime("%d.%m.%Y")
+
     try:
         response = requests.get(api_url, params=params).json()
     except requests.RequestException as e:
@@ -54,13 +58,18 @@ def get_weather_data(
     if response['data'][0]['temp'] is None:
         raise HTTPException(status_code=400, detail="Invalid request.")
 
-    return proccess_weather_data(response)
+    return proccess_weather_data(response, start_date, end_date)
 
 
-def proccess_weather_data(weather_data: dict) -> dict:
+def proccess_weather_data(weather_data: dict, start_date: str, end_date: str) -> dict:
     try:
         num_of_records = len(weather_data['data'])
-        return_data = {"city": weather_data['city_name'], "num_of_records": num_of_records}
+        return_data = {
+            "city": weather_data['city_name'],
+            "num_of_records": num_of_records,
+            "start_date": start_date,
+            "end_date": end_date,
+        }
         return_data['data'] = []
 
         for weather in weather_data['data']:

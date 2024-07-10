@@ -39,6 +39,8 @@ def analysis(
     )
     context = {
         "city": weather_data['city'],
+        "start_date": weather_data['start_date'],
+        "end_date": weather_data['end_date'],
         "visualizations": visualizations,
         "descriptive_stats": descriptive_stats,
     }

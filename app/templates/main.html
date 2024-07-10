@@ -4,47 +4,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Analyzer</title>
     <link href="{{ url_for('static', path='/main.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', path='/functions.js') }}"></script>
 </head>
 <body>
 </body>
     <main>
-        <form class="input-location-form" action="{{ url_for('analysis') }}", method="GET">
-            <div class="input-location-container">
-                <div class="input-location-by-city-name-block">
-                    <input class="location-type-button" type="button" value="By city name">
-                    <div class="input-city-name">
-                        <label for='city_name'>City name: </label>
-                        <input type='text' name='city_name'>
-                    </div>
+        <div class="main-content">
+            <div class="button-block">
+                <div class="input-button-block">
+                    <input class="location-type-button" type="button" value="By city name" onclick="toggleInputType()">
                 </div>
-                <div class="input-location-by-coordinates-block">
-                    <input class="location-type-button" type="button" value="By coordinates">
-                    <div class="input-coordinates">
-                        <div class="input-latitude">
-                            <label for='latitude'>Latitude: </label>
-                            <input type='text' name='latitude'>
-                        </div>
-                        <div class="input-longitude">
-                            <label for='longitude'>Longitude: </label>
-                            <input type='text' name='longitude'>
-                        </div>
-                    </div>
+                <div class="input-button-block light-dark-overlay">
+                    <input class="location-type-button" type="button" value="By coordinates" onclick="toggleInputType()">
                 </div>
             </div>
-            <div class="input-date-block">
-                <p style="max-width: fit-content; margin-left: auto; margin-right: auto;">Date</p>
-                <div class="input-start-and-end-date-block">
-                    <div class="input-start-date-block">
-                        <label for='start_date'>From: </label>
-                        <input type="date" name="start_date" required>
+            <form class="input-location-form" action="{{ url_for('analysis') }}", method="GET">
+                <div class="input-location-container">
+                    <div class="input-location-block">
+                        <div class="input-city-name">
+                            <label for='city_name'>City name: </label>
+                            <input type='text' name='city_name'>
+                        </div>
                     </div>
-                    <div class="input-end-date-block">
-                        <label for='end_date'>To: </label>
-                        <input type="date" name="end_date" required>
+                    <div class="input-location-block dark-overlay">
+                        <div class="input-coordinates">
+                            <div class="input-latitude">
+                                <label for='latitude'>Latitude: </label>
+                                <input type='text' name='latitude'>
+                            </div>
+                            <div class="input-longitude">
+                                <label for='longitude'>Longitude: </label>
+                                <input type='text' name='longitude'>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <input type="submit" value="Search">
-        </form>
+                <div class="input-date-block">
+                    <p style="max-width: fit-content; margin-left: auto; margin-right: auto;">Date</p>
+                    <div class="input-start-and-end-date-block">
+                        <div class="input-start-date-block">
+                            <label for='start_date'>From: </label>
+                            <input type="date" name="start_date" required>
+                        </div>
+                        <div class="input-end-date-block">
+                            <label for='end_date'>To: </label>
+                            <input type="date" name="end_date" required>
+                        </div>
+                    </div>
+                </div>
+                <input class="submit-button" type="submit" value="Search">
+            </form>
+        </div>
     </main>
 </html>

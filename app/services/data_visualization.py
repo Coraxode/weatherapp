@@ -7,7 +7,7 @@ import base64
 
 def get_visualizations(weather_data: dict, num_of_records: int) -> tuple:
     def plot_and_encode(df, x, y, label, ylabel, title, color=None):
-        plt.figure(figsize=(9, 4.5))
+        plt.figure(figsize=(8, 4.5))
         plt.plot(df[x], df[y], label=label, color=color)
         plt.ylabel(ylabel)
         plt.xlabel("Date")
